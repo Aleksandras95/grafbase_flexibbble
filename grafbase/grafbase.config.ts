@@ -1,19 +1,20 @@
-import { g, config, auth } from '@grafbase/sdk';
+import { g, auth, config } from '@grafbase/sdk'
 
-// @ts-ignore
+//@ts-ignore
 const User = g.model('User', {
-  name: g.string().length({ min: 2, max: 100 }),
-  email: g.string().unique(),
-  avatarUrl: g.url(),
-  description: g.string().length({ min: 2, max: 1000 }).optional(),
-  githubUrl: g.url().optional(),
-  linkedinUrl: g.url().optional(), 
-  projects: g.relation(() => Project).list().optional(),
+ name: g.string().length({ min: 2, max: 100 }),
+ email: g.string().unique(),
+ avatarUrl: g.url(),
+ description: g.string().length({ min: 2, max: 1000 }).optional(),
+ githubUrl: g.url().optional(),
+ linkedinUrl: g.url().optional(),
+ //@ts-ignore
+ projects: g.relation(() => Project).list().optional(),
 }).auth((rules) => {
-  rules.public().read()
+ rules.public().read()
 })
 
-// @ts-ignore
+//@ts-ignore
 const Project = g.model('Project', {
   title: g.string().length({ min: 3 }),
   description: g.string(), 
@@ -39,4 +40,3 @@ export default config({
     rules: (rules) => rules.private()
   },
 })
-
