@@ -5,7 +5,7 @@ export const metadata = {
   title: 'Flexibbble',
   description: 'Showcase and discover remarable developer projects',
 }
-
+export const revalidate = 0;
 export default function RootLayout({
   children,
 }: {
