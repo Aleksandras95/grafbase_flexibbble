@@ -1,19 +1,18 @@
 import { getServerSession } from "next-auth/next";
 import { NextAuthOptions, User } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
-import GoogleProvider from "next-auth/providers/google";
-import jsonwebtoken from 'jsonwebtoken'
-import { JWT } from "next-auth/jwt";
-
-import { createUser, getUser } from "./actions";
+import GoogleProvider from 'next-auth/providers/google';
+import jsonwebtoken from 'jsonwebtoken';
+import { JWT } from 'next-auth/jwt';
 import { SessionInterface, UserProfile } from "@/common.types";
+import { createUser, getUser } from "./actions";
 
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    })
   ],
   jwt: {
     encode: ({ secret, token }) => {
@@ -34,8 +33,8 @@ export const authOptions: NextAuthOptions = {
     },
   },
   theme: {
-    colorScheme: "light",
-    logo: "/logo.svg",
+    colorScheme: 'light',
+    logo: '/logo.png'
   },
   callbacks: {
     async session({ session }) {
@@ -82,3 +81,5 @@ export async function getCurrentUser() {
 
   return session;
 }
+
+//return a Google user
